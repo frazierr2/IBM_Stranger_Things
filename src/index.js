@@ -1,12 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import * as English from "./Data/en_US.json";
+import * as PigLatin from "./Data/la_PG.json";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Redux Store
+import { combineReducers, createStore } from "redux";
+import { Provider } from "react-redux";
+import languageReducer from "./Reducers/languageReducer";
+
+const allReducers = combineReducers({
+  language: languageReducer
+});
+
+const initialState = {
+  language: "English",
+  eng: [English.default],
+  pig: [PigLatin.default]
+};
+
+// Redux Store w/ Initial State
+const store = createStore(
+  allReducers,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+//WITH REDUX
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

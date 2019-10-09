@@ -1,0 +1,17 @@
+#language-container {
+  text-align: right;
+}
+#language-button {
+  background-color: transparent;
+  border-color: black;
+  color: black;
+  width: 200px;
+}
+
+.navbar-row {
+  margin-top: 10px;
+}
+
+#show-title {
+  margin-top: 15px;
+}
